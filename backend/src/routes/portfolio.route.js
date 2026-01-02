@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const auth = require('../middleware/authMiddleware')
-const { getPortfolio, createTrade } = require('../controllers/portfolioController')
+const { getPortfolio, createTrade } = require('../controllers/portfolio.controller')
 
 router.get('/', auth, getPortfolio)
 router.post('/trade', auth, createTrade)
