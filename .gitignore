@@ -1,0 +1,59 @@
+# node_modules/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend specific
+backend/logs/
+backend/coverage/
+
+# Frontend specific
+frontend/.next/
+frontend/out/
+frontend/.swc/
+
+# ML Service specific
+ml-service/__pycache__/
+ml-service/*.pyc
+ml-service/.pytest_cache/
+ml-service/venv/
+ml-service/.venv/
+ml-service/*.egg-info/
+
+# Docker
+*.dockerignore
+
+# Database
+*.sql.backup
+*.db
