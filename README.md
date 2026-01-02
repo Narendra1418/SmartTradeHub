@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SmartTradeHub
 
 A comprehensive AI-powered stock trading platform with real-time market data, portfolio management, and machine learning predictions.
@@ -389,3 +390,6 @@ Project Link: [https://github.com/Narendra1418/SmartTradeHub](https://github.com
 ---
 
 ⭐ Star this repository if you find it helpful!
+=======
+#SmartTradeHub Project
+>>>>>>> f2276600d16fbe872471f978e4905bad349111db
