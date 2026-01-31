@@ -1,8 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Bright Background Colors */
+  --background: #f0f9ff;
+  --foreground: #1e293b;
+  --card-bg: #ffffff;
+  
+  /* Vibrant Primary Colors */
+  --primary: #0ea5e9;
+  --primary-hover: #0284c7;
+  --primary-light: #e0f2fe;
+  --primary-dark: #0369a1;
+  
+  /* Success/Growth Colors */
+  --success: #22c55e;
+  --success-hover: #16a34a;
+  --success-light: #dcfce7;
+  --success-dark: #15803d;
+  
+  /* Danger/Loss Colors */
+  --danger: #f43f5e;
+  --danger-hover: #e11d48;
+  --danger-light: #ffe4e6;
+  
+  /* Accent Colors */
+  --accent: #a855f7;
+  --accent-hover: #9333ea;
+  --accent-light: #f3e8ff;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  
+  /* Neutral Colors */
+  --border: #cbd5e1;
+  --border-hover: #94a3b8;
+  --text-muted: #64748b;
+  --text-secondary: #475569;
+  
+  /* Interactive Elements */
+  --hover-bg: #e0f2fe;
+  --active-bg: #bae6fd;
+  
+  /* Gradient Colors */
+  --gradient-start: #0ea5e9;
+  --gradient-end: #a855f7;
 }
 
 @theme inline {
@@ -12,15 +52,31 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* Smooth transitions for interactive elements */
+* {
+  transition: all 0.2s ease;
+}
+
+/* Remove black backgrounds globally */
+.bg-black {
+  background: var(--primary) !important;
+}
+
+/* Enhanced input styling */
+input, textarea, select {
+  background: white;
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--primary);
+  border-color: var(--primary);
 }
