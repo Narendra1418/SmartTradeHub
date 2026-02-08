@@ -1,16 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user cookie exists
+    const cookies = document.cookie.split(';');
+    const userCookie = cookies.find(c => c.trim().startsWith('user='));
+    setIsLoggedIn(!!userCookie);
+  }, [pathname]); // Re-check on every route change
 
   async function handleLogout() {
     await fetch("/api/auth/logout", {
       method: "POST",
     });
 
+    setIsLoggedIn(false);
     router.replace("/login");
   }
 
@@ -48,25 +59,47 @@ export default function Navbar() {
           📊 Dashboard
         </Link>
 
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 rounded-lg font-medium transition-all duration-200"
-          style={{
-            color: 'var(--danger)',
-            backgroundColor: 'var(--danger-light)',
-            border: 'none'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--danger)';
-            e.currentTarget.style.color = 'white';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--danger-light)';
-            e.currentTarget.style.color = 'var(--danger)';
-          }}
-        >
-          🚪 Logout
-        </button>
+        {isLoggedIn ? (
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+            style={{
+              color: 'var(--danger)',
+              backgroundColor: 'var(--danger-light)',
+              border: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--danger)';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--danger-light)';
+              e.currentTarget.style.color = 'var(--danger)';
+            }}
+          >
+            🚪 Logout
+          </button>
+        ) : (
+          <Link
+            href="/login"
+            className="px-4 py-2 rounded-lg font-medium transition-all duration-200"
+            style={{
+              color: 'var(--primary)',
+              backgroundColor: 'var(--primary-light)',
+              border: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--primary)';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--primary-light)';
+              e.currentTarget.style.color = 'var(--primary)';
+            }}
+          >
+            🔐 Login
+          </Link>
+        )}
       </div>
     </nav>
   );
