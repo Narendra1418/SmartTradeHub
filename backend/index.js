@@ -1,13 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 
-const app = express(); // ✅ app is defined HERE
+const authRoutes = require("./routes/auth");
+const authMiddleware = require("./middleware/auth");
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ---------- MARKET API ---------- */
-app.get("/api/market/summary", (_req, res) => {
+// ✅ AUTH ROUTES
+app.use("/api/auth", authRoutes);
+
+// ✅ PROTECTED API
+app.get("/api/market/summary", authMiddleware, (_req, res) => {
   res.json({
     portfolioValue: 125000,
     todaysPL: 2350,
@@ -15,26 +20,6 @@ app.get("/api/market/summary", (_req, res) => {
   });
 });
 
-/* ---------- AUTH API (FAKE LOGIN) ---------- */
-app.post("/api/auth/login", (req, res) => {
-  const { email, password } = req.body;
-
-  if (email === "test@example.com" && password === "123456") {
-    return res.json({
-      user: {
-        email,
-        name: "Test User",
-      },
-    });
-  }
-
-  return res.status(401).json({
-    message: "Invalid credentials",
-  });
-});
-
-/* ---------- SERVER START ---------- */
-const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
+app.listen(4000, () => {
+  console.log("Backend running on http://localhost:4000");
 });
