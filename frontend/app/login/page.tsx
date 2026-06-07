@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
 
@@ -19,6 +19,7 @@ export default function LoginPage() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ email, password }),
     });
 
@@ -29,9 +30,7 @@ export default function LoginPage() {
       return;
     }
 
-    // ✅ STORE LOGIN IN COOKIE (middleware can read this)
-    document.cookie = `user=${data.user.email}; path=/`;
-
+    // ✅ Session cookie is automatically set by backend (httpOnly)
     // ✅ REDIRECT TO DASHBOARD
     router.replace("/dashboard");
   }

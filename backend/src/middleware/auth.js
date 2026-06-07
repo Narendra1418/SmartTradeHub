@@ -22,4 +22,5 @@ async function authMiddleware(req, res, next) {
   }
 }
 
+// 🔥 THIS LINE IS CRITICAL
 module.exports = authMiddleware;
